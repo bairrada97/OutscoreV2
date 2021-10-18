@@ -1,15 +1,18 @@
+<template>
+  <nav class="calendarBar">
+    <AtomsLiveToggle @click="toggleLive" :isLive="liveToggle" />
+    <MoleculesCalendarDays />
+    <AtomsCalendarButton @click="openCalendar" />
+  </nav>
+</template>
+
 <script setup>
 import store from "@/store.js";
 
 const liveToggle = computed(() => store.getLiveToggle());
 const toggleLive = () => store.setLiveToggle(!liveToggle.value);
+const openCalendar = () => store.setCalendarOpen(true);
 </script>
-
-<template>
-  <nav class="calendarBar">
-    <A-LiveToggle @click="toggleLive" :isLive="liveToggle" />
-  </nav>
-</template>
 
 <style lang="scss" scoped>
 .calendarBar {

@@ -1,10 +1,3 @@
-<script setup>
-const props = defineProps({
-  isLive: Boolean,
-});
-const displayText = ref("Live");
-</script>
-
 <template>
   <button class="liveToggle" :class="{ active: isLive }">
     <svg
@@ -25,6 +18,13 @@ const displayText = ref("Live");
     <span class="liveToggle__text"> {{ displayText }}</span>
   </button>
 </template>
+
+<script setup>
+const props = defineProps({
+  isLive: Boolean,
+});
+const displayText = ref("Live");
+</script>
 
 <style lang="scss" scoped>
 .liveToggle {
