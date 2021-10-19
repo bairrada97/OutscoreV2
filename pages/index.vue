@@ -25,7 +25,7 @@ import useLiveGames from '@/utils/useLiveGames';
 const { getCookie, checkCookie } = useCookies();
 const { fetchGamesByDate } = useGamesByDate();
 const { fetchLiveGames } = useLiveGames();
-
+const counter = ref(0);
 const selectedDate = computed(() => store.getSelectedDate());
 const liveToggle = computed(() => store.getLiveToggle());
 const openGames = ref([]);
@@ -36,7 +36,7 @@ const fetch = async () => {
     return liveToggle.value ? await fetchLiveGames() : await fetchGamesByDate();
 };
 
-const { data, refresh } = await useAsyncData('gamesByDate', () => {
+const { data, refresh } = await useAsyncData(`gamesByDate`, () => {
     getCookie('timezone') == '' ? (timezoneCookie.value = 'Europe/Amsterdam') : checkCookie('timezone');
     return fetch();
 });
@@ -81,7 +81,7 @@ const fetchOnBrowserVisibility = async () => {
     }
 };
 
-onDeactivated(() => {
+onBeforeUnmount(() => {
     clearInterval(interval.value);
     document.removeEventListener('visibilitychange', fetchOnBrowserVisibility);
 });
