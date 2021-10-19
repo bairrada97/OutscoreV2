@@ -74,9 +74,9 @@ const fetchOnBrowserVisibility = async () => {
     if (document.visibilityState == 'hidden') {
         clearInterval(interval.value);
     } else {
-        fetch();
+        refresh();
         interval.value = setInterval(async () => {
-            fetch();
+            refresh();
         }, 15000);
     }
 };
@@ -87,7 +87,7 @@ onBeforeUnmount(() => {
 });
 
 onMounted(() => {
-    if (getCookie('timezone') == '') fetch();
+    if (getCookie('timezone') == '') refresh();
     checkCookie('timezone', new Intl.DateTimeFormat().resolvedOptions().timeZone);
 
     document.addEventListener('visibilitychange', fetchOnBrowserVisibility);
