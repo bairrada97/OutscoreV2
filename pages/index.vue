@@ -8,7 +8,7 @@
                 <div class="align--full" v-if="getOpenGame(countryName)">
                     <div v-for="(competition, key) in countryName.league" :key="key">
                         <MoleculesCardLeague :name="key" :league="competition" />
-                        <MoleculesCardGame v-for="game in competition" :key="game.fixture.id" :game="game" />
+                        <MoleculesCardGame v-for="game in competition" :key="game.fixture.id + game.fixture.status.elapsed" :game="game" />
                     </div>
                 </div>
             </MoleculesCardCountry>
@@ -22,7 +22,6 @@ import useCookies from '@/utils/useCookies.js';
 import useGamesByDate from '@/utils/useGamesByDate.js';
 import useLiveGames from '@/utils/useLiveGames';
 
-const getLeagues = ref('');
 const { getCookie, checkCookie } = useCookies();
 const { fetchGamesByDate } = useGamesByDate();
 const { fetchLiveGames } = useLiveGames();
@@ -31,7 +30,6 @@ const selectedDate = computed(() => store.getSelectedDate());
 const liveToggle = computed(() => store.getLiveToggle());
 const openGames = ref([]);
 const interval = ref(null);
-const timezoneCookie = ref(null);
 const favoriteLeaguesID = ref([2, 3, 94, 39, 140, 135, 61, 78]);
 
 const fetch = async () => {
@@ -44,8 +42,8 @@ const { data, refresh } = await useAsyncData('gamesByDate', () => {
 });
 
 const getFavoriteLeagues = computed(() => {
-    if (!getLeagues.value) return;
-    return Object.values(getLeagues.value)
+    if (!data.value) return;
+    return Object.values(data.value)
         ?.map((country) => Object.values(country.league))
         .flat(1)
         .filter((item) => item.find((league) => favoriteLeaguesID.value.includes(league.league.id)));
@@ -89,7 +87,6 @@ onDeactivated(() => {
 });
 
 onMounted(() => {
-    console.log('entrou');
     if (getCookie('timezone') == '') fetch();
     checkCookie('timezone', new Intl.DateTimeFormat().resolvedOptions().timeZone);
 
