@@ -37,7 +37,7 @@ const fetch = async () => {
 };
 
 const { data, refresh } = await useAsyncData(`gamesByDate`, () => {
-    getCookie('timezone') == '' ? (timezoneCookie.value = 'Europe/Amsterdam') : checkCookie('timezone');
+    if (getCookie('timezone') != '') checkCookie('timezone');
     return fetch();
 });
 
