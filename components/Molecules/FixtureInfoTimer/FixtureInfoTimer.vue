@@ -5,8 +5,8 @@
         </div>
         <div class="fixtureInfoTimer__labelsContainer">
             <span class="fixtureInfoTimer__label" v-if="fixture.fixture">{{ getDate(fixture.fixture.timestamp) }}</span>
-            <span class="fixtureInfoTimer__label">HT</span>
-            <span class="fixtureInfoTimer__label">FT</span>
+            <span class="fixtureInfoTimer__label">{{ halfTimeShort }}</span>
+            <span class="fixtureInfoTimer__label">{{ fullTimeShort }}</span>
         </div>
     </div>
 </template>
@@ -15,6 +15,8 @@
 const props = defineProps({
     fixture: Object
 });
+const halfTimeShort = ref('HT');
+const fullTimeShort = ref('FT');
 const getDate = (timestamp) => {
     let hours = new Date(timestamp * 1000).getHours();
     let minutes = new Date(timestamp * 1000).getMinutes();

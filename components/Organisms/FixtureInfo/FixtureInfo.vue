@@ -43,11 +43,6 @@ const props = defineProps({
         align-items: center;
     }
 
-    &__team {
-        font-size: 12px;
-        margin-top: 8px;
-    }
-
     &__statusContainer {
         grid-column: 2;
         grid-row: 1;
@@ -55,50 +50,6 @@ const props = defineProps({
         flex-direction: column;
         align-items: center;
         margin-bottom: 4px;
-    }
-
-    &__extraInfo {
-        grid-column: 1/3;
-        grid-row: 2;
-        text-align: center;
-    }
-
-    &__extraInfoContainer {
-        display: grid;
-    }
-
-    &__extraScore {
-        font-size: 14px;
-        font-weight: 700;
-        grid-row: 1;
-
-        &--divider {
-            grid-column: 2;
-            grid-row: 1;
-        }
-    }
-
-    &__bar {
-        width: 100%;
-        background-color: #fff;
-        height: 4px;
-    }
-
-    &__timerProgress {
-        height: 100%;
-        background-color: #212121;
-        z-index: 2;
-    }
-
-    &__labelsContainer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 8px;
-    }
-
-    &__label {
-        font-size: 12px;
     }
 }
 </style>
