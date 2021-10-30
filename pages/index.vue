@@ -1,18 +1,33 @@
 <template>
-    <OrganismsCalendarBar />
-    <div class="leagueContainer">
-        <h2 class="leagueTypes">National Leagues</h2>
-
-        <div @click="openGame($event, countryName)" v-for="(countryName, key) in data" :key="countryName.league.id">
-            <MoleculesCardCountry :country="countryName" :name="key" :isOpen="getOpenGame(countryName) ? 'isOpen' : ''">
-                <div class="align--full" v-if="getOpenGame(countryName)">
-                    <div v-for="(competition, key) in countryName.league" :key="key">
-                        <MoleculesCardLeague :name="key" :league="competition" />
-                        <MoleculesCardGame v-for="game in competition" :key="game.fixture.id + game.fixture.status.elapsed" :game="game" />
+    <div>
+        <OrganismsCalendarBar />
+        <OrganismsOutterWrapper>
+            <OrganismsInnerWrapper>
+                <h2 class="leagueTypes">Favorite Leagues</h2>
+                <div v-if="getFavoriteLeagues">
+                    <div v-for="competition in getFavoriteLeagues" :key="competition[0].league.id" class="favoriteLeagues">
+                        <MoleculesCardLeague :name="competition[0].league.name" :league="competition" />
+                        <MoleculesCardGame :game="game" v-for="game in competition" :key="game.fixture.id" />
                     </div>
                 </div>
-            </MoleculesCardCountry>
-        </div>
+                <p v-else class="noFavoriteLeague">Currently you haven't select any favorite leagues</p>
+            </OrganismsInnerWrapper>
+        </OrganismsOutterWrapper>
+
+        <OrganismsOutterWrapper>
+            <h2 class="leagueTypes">National Leagues</h2>
+
+            <div @click="openGame($event, countryName)" v-for="(countryName, key) in data" :key="countryName.league.id">
+                <MoleculesCardCountry :country="countryName" :name="key" :isOpen="getOpenGame(countryName) ? 'isOpen' : ''">
+                    <OrganismsInnerWrapper v-if="getOpenGame(countryName)">
+                        <div v-for="(competition, key) in countryName.league" :key="key">
+                            <MoleculesCardLeague :name="key" :league="competition" />
+                            <MoleculesCardGame v-for="game in competition" :key="game.fixture.id + game.fixture.status.elapsed" :game="game" />
+                        </div>
+                    </OrganismsInnerWrapper>
+                </MoleculesCardCountry>
+            </div>
+        </OrganismsOutterWrapper>
     </div>
 </template>
 
@@ -25,7 +40,7 @@ import useLiveGames from '@/utils/useLiveGames';
 const { getCookie, checkCookie } = useCookies();
 const { fetchGamesByDate } = useGamesByDate();
 const { fetchLiveGames } = useLiveGames();
-const counter = ref(0);
+
 const selectedDate = computed(() => store.getSelectedDate());
 const liveToggle = computed(() => store.getLiveToggle());
 const openGames = ref([]);
@@ -73,12 +88,13 @@ const openGame = ({ currentTarget }, countryName) => {
 const fetchOnBrowserVisibility = async () => {
     if (document.visibilityState == 'hidden') {
         clearInterval(interval.value);
-    } else {
-        refresh();
-        interval.value = setInterval(async () => {
-            refresh();
-        }, 15000);
+        return;
     }
+
+    refresh();
+    interval.value = setInterval(async () => {
+        refresh();
+    }, 15000);
 };
 
 onBeforeUnmount(() => {
@@ -109,11 +125,6 @@ store.setSelectedMatch({});
 </script>
 
 <style lang="scss" scoped>
-.leagueContainer {
-    &:last-of-type {
-        margin-bottom: 55px;
-    }
-}
 .leagueTypes {
     font-size: 14px;
     font-weight: 600;

@@ -1,29 +1,19 @@
 <template>
-    <div :class="{ isGameLive: isGameLive, goalScored: homeTeamScored || awayTeamScored }" class="cardGame">
+    <nuxt-link :to="{ name: 'match', query: { fixture: game.fixture.id }, params: { match: JSON.stringify(game) } }" :class="{ isGameLive: isGameLive, goalScored: homeTeamScored || awayTeamScored }" class="cardGame">
         <AtomsFixtureStatus :status="renderFixtureStatus" />
         <div class="cardGame__teamsContainer">
-            <div class="cardGame__team" :class="{ teamScored: homeTeamScored }">
-                <span class="cardGame__team__goal">{{ game.score.penalty.home ? game.score.penalty.home : game.goals.home }}</span>
-                <span class="cardGame__team__name">{{ game.teams.home.name }}</span>
-            </div>
-            <div class="cardGame__team" :class="{ teamScored: awayTeamScored }">
-                <span class="cardGame__team__goal">{{ game.score.penalty.away ? game.score.penalty.away : game.goals.away }}</span>
-                <span class="cardGame__team__name">{{ game.teams.away.name }}</span>
-            </div>
+            <AtomsFixtureTeam :wasGoal="homeTeamScored" :score="homeScore" :name="game.teams.home.name" />
+            <AtomsFixtureTeam :wasGoal="awayTeamScored" :score="awayScore" :name="game.teams.away.name" />
         </div>
+        <AtomsFavoriteIcon v-if="notH2H" />
+        <AtomsViewMoreIcon v-if="notH2H" />
 
-        <svg v-if="type != 'H2H'" class="cardGame__favoriteIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g opacity="0.3">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.81 9.12L22 9.74L16.55 14.47L18.18 21.5L12 17.77L5.82 21.5L7.46 14.47L2 9.74L9.19 9.13L12 2.5L14.81 9.12ZM8.24 18.17L12 15.9L15.77 18.18L14.77 13.9L18.09 11.02L13.71 10.64L12 6.6L10.3 10.63L5.92 11.01L9.24 13.89L8.24 18.17Z" fill="#212121" />
-            </g>
-        </svg>
-        <svg v-if="type != 'H2H'" class="cardGame__viewMoreIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM10 18C10 16.9 10.9 16 12 16C13.1 16 14 16.9 14 18C14 19.1 13.1 20 12 20C10.9 20 10 19.1 10 18Z" fill="#212121" />
-        </svg>
+        <!-- TODO: refactor once build H2H page -->
+        <!--<FixtureOutcomeLetter /> -->
         <span v-if="winCondition != undefined" :class="winCondition == 1 ? 'cardGame__teamWon' : winCondition == 0 ? 'cardGame__teamDrew' : 'cardGame__teamLost'">
             {{ winCondition == 1 ? 'W' : winCondition == 0 ? 'D' : 'L' }}
         </span>
-    </div>
+    </nuxt-link>
 </template>
 
 <script setup>
@@ -34,10 +24,17 @@ const props = defineProps({
     type: String,
     winCondition: [String, Number]
 });
-console.log(props.game.fixture.status.elapsed);
 const { renderFixtureStatus, isGameLive } = useFixtureStatus(props.game, props.type);
-const homeTeamScored = ref('');
-const awayTeamScored = ref('');
+const homeTeamScored = ref(false);
+const awayTeamScored = ref(false);
+
+const homeScore = computed(() => (props.game.score.penalty.home ? props.game.score.penalty.home : props.game.goals.home));
+const awayScore = computed(() => (props.game.score.penalty.away ? props.game.score.penalty.away : props.game.goals.away));
+
+const teamWon = computed(() => props.winCondition == 1);
+const teamLost = computed(() => props.winCondition == 0);
+
+const notH2H = props.type != 'H2H';
 
 watch(
     () => [props.game.goals, props.game.fixture.status.elapsed],
@@ -112,19 +109,6 @@ watch(
         display: flex;
         flex-direction: column;
         gap: 4px 0;
-    }
-
-    &__team {
-        display: flex;
-        gap: 0 8px;
-
-        &.teamScored {
-            font-weight: 600;
-        }
-    }
-
-    &__viewMoreIcon {
-        box-sizing: content-box;
     }
 
     &__teamWon {
