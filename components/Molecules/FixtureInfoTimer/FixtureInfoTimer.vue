@@ -1,10 +1,10 @@
 <template>
     <div class="fixtureInfoTimer">
         <div class="fixtureInfoTimer__bar">
-            <div class="fixtureInfoTimer__timerProgress" v-if="fixture.fixture" :style="{ width: convertFixtureCurrentTimeInWidth(fixture.fixture.status.elapsed) }"></div>
+            <div class="fixtureInfoTimer__timerProgress" v-if="fixtureDetail.fixture" :style="{ width: convertFixtureCurrentTimeInWidth(fixtureDetail.fixture.status.elapsed) }"></div>
         </div>
         <div class="fixtureInfoTimer__labelsContainer">
-            <span class="fixtureInfoTimer__label" v-if="fixture.fixture">{{ getDate(fixture.fixture.timestamp) }}</span>
+            <span class="fixtureInfoTimer__label" v-if="fixtureDetail.fixture">{{ getDate(fixtureDetail.fixture.timestamp) }}</span>
             <span class="fixtureInfoTimer__label">{{ halfTimeShort }}</span>
             <span class="fixtureInfoTimer__label">{{ fullTimeShort }}</span>
         </div>
@@ -13,7 +13,7 @@
 
 <script setup>
 const props = defineProps({
-    fixture: Object
+    fixtureDetail: Object
 });
 const halfTimeShort = ref('HT');
 const fullTimeShort = ref('FT');

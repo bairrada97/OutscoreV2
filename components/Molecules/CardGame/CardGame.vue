@@ -88,6 +88,7 @@ watch(
     align-items: center;
     gap: 0 16px;
     padding: 8px 16px;
+    box-sizing: border-box;
 
     &:not(&:last-of-type) {
         border-bottom: 1px solid rgba(183, 183, 183, 0.3);

@@ -1,32 +1,32 @@
 <template>
     <div class="fixtureInfoStatus">
         <div class="fixtureInfoStatus__score" v-if="!fixtureWillNotStart">
-            <AtomsFixtureStatus v-for="(score, index) in fixture.goals" :key="index" :status="score || 0" />
+            <AtomsFixtureStatus v-for="(score, index) in fixtureDetail.goals" :key="index" :status="score || 0" />
         </div>
         <span class="fixtureInfoStatus__extraInfo" v-if="fixtureHasntStarted">{{ displayTimeLeftForGameStart }}</span>
         <div class="fixtureInfoStatus__extraInfo" v-if="isPenalty">
             <span>{{ penaltyText }}</span>
             <span class="fixtureInfoStatus__extraInfoContainer">
-                <span class="fixtureInfoStatus__extraScore" v-for="(score, index) in fixture.score.penalty" :key="index"> {{ score }} </span>
+                <span class="fixtureInfoStatus__extraScore" v-for="(score, index) in fixtureDetail.score.penalty" :key="index"> {{ score }} </span>
                 <span class="fixtureInfoStatus__extraScore--divider"> - </span>
             </span>
         </div>
-        <span class="fixtureInfoStatus__extraInfo">{{ isStatusIncluded ? fixture.fixture.status.long : fixture.fixture.status.elapsed }} </span>
+        <span class="fixtureInfoStatus__extraInfo">{{ isStatusIncluded ? fixtureDetail.fixture.status.long : fixtureDetail.fixture.status.elapsed }} </span>
     </div>
 </template>
 
 <script setup>
 const props = defineProps({
-    fixture: Object
+    fixtureDetail: Object
 });
 const penaltyText = ref('Penalties');
 const fixtureWillNotStartStatus = ref(['CANC', 'PST', 'ABD', 'WO', 'INT']);
 const shortNamesStatus = ref(['CANC', 'PST', 'ABD', 'WO', 'FT', 'HT']);
 
-const isPenalty = computed(() => props.fixture.fixture.status.short == 'PEN');
-const fixtureWillNotStart = computed(() => fixtureWillNotStartStatus.value.includes(props.fixture.fixture.status.short));
-const isStatusIncluded = computed(() => shortNamesStatus.value.includes(props.fixture.fixture.status.short));
-const fixtureHasntStarted = computed(() => props.fixture.fixture.status.short == 'NS' && seconds.value > 0);
+const isPenalty = computed(() => props.fixtureDetail.fixture.status.short == 'PEN');
+const fixtureWillNotStart = computed(() => fixtureWillNotStartStatus.value.includes(props.fixtureDetail.fixture.status.short));
+const isStatusIncluded = computed(() => shortNamesStatus.value.includes(props.fixtureDetail.fixture.status.short));
+const fixtureHasntStarted = computed(() => props.fixtureDetail.fixture.status.short == 'NS' && seconds.value > 0);
 
 const days = ref(0);
 const hours = ref(0);
@@ -43,7 +43,7 @@ const displayTimeLeftForGameStart = computed(() => {
 });
 
 const setTimer = () => {
-    const gameDate = props.fixture?.fixture.date;
+    const gameDate = props.fixtureDetail?.fixture.date;
     const timeLeftForGameStart = new Date(gameDate).getTime() - new Date().getTime();
     days.value = Math.floor(timeLeftForGameStart / (1000 * 60 * 60 * 24));
     hours.value = Math.floor((timeLeftForGameStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

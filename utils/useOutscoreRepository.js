@@ -35,13 +35,26 @@ export default function  () {
             }
          });
  
-        
+         
     }
 
-   
+      const getFixturesById = async (id,timezone) => {
+          return await $fetch(OUTSCORE_ENDPOINTS.fixtures,
+         {
+            baseURL: OUTSCORE_ENDPOINTS.baseURL,
+            params: {
+                id,
+                timezone
+            }
+         });
+ 
+         
+    }
+
 	return {
 		getFixturesByDate,
-        getLiveGames
+        getLiveGames,
+        getFixturesById
      
 	};
 }

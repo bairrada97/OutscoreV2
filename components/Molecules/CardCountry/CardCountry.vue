@@ -34,6 +34,7 @@ const liveToggle = computed(() => store.getLiveToggle());
         padding: 8px 16px;
         align-items: center;
         border-bottom: 1px solid rgba(183, 183, 183, 0.3);
+        box-sizing: border-box;
     }
 
     &.isOpen {

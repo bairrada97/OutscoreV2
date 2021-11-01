@@ -1,24 +1,24 @@
 <template>
     <div class="fixtureInfo">
         <div class="fixtureInfo__container">
-            <div class="fixtureInfo__teamsContainer" v-if="fixture.teams">
-                <div class="fixtureInfo__teams" v-for="team in fixture.teams" :key="team.id">
+            <div class="fixtureInfo__teamsContainer" v-if="fixtureDetail.teams">
+                <div class="fixtureInfo__teams" v-for="team in fixtureDetail.teams" :key="team.id">
                     <AtomsLogo v-if="team.logo" :logo="team.logo" :name="team.name" />
                     <AtomsLogoName :name="team.name" />
                 </div>
                 <div class="fixtureInfo__statusContainer">
-                    <MoleculesFixtureInfoStatus :fixture="fixture" />
+                    <MoleculesFixtureInfoStatus :fixtureDetail="fixtureDetail" />
                 </div>
             </div>
             <div class="fixtureInfo__timerContainer">
-                <MoleculesFixtureInfoTimer :fixture="fixture" />
+                <MoleculesFixtureInfoTimer :fixtureDetail="fixtureDetail" />
             </div>
         </div>
     </div>
 </template>
 <script setup>
 const props = defineProps({
-    fixture: Object
+    fixtureDetail: Object
 });
 </script>
 
