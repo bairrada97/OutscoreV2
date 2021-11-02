@@ -1,5 +1,5 @@
 <template>
-    <img class="countryFlag" width="24" height="24" :src="logo" :alt="name + ' logo'" />
+    <img class="countryFlag" width="24" height="24" :src="logo" :alt="name + ' logo'" lazy="loading" priority="low" />
 </template>
 
 <script setup>
