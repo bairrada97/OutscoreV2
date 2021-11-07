@@ -7,6 +7,7 @@
                 <MoleculesCardEvent v-for="(event, index) in periods.events" :key="index" :event="event" />
             </div>
         </div>
+        <MoleculesCardVenue :venue="displayVenue" />
     </div>
 </template>
 <script setup>

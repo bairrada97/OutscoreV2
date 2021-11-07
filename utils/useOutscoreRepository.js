@@ -6,7 +6,8 @@ export default function  () {
     const OUTSCORE_ENDPOINTS = {
        baseURL: 'https://api-football-v3.herokuapp.com/api/v3',
         fixtures: "/fixtures",
-        h2h:"/fixtures/headtohead"
+        h2h:"/fixtures/headtohead",
+        injuries:"/injuries"
 
     }
 
@@ -46,15 +47,25 @@ export default function  () {
                 id,
                 timezone
             }
-         });
- 
-         
+         }); 
+    }
+
+       const getFixturesInjuries = async (fixtureID) => {
+          return await $fetch(OUTSCORE_ENDPOINTS.injuries,
+         {
+            baseURL: OUTSCORE_ENDPOINTS.baseURL,
+            params: {
+                fixture:fixtureID,
+              
+            }
+         }); 
     }
 
 	return {
 		getFixturesByDate,
         getLiveGames,
-        getFixturesById
+        getFixturesById,
+        getFixturesInjuries
      
 	};
 }

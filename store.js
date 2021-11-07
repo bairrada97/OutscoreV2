@@ -24,7 +24,8 @@ const state = reactive({
 		away: {},
 		home: {},
 		h2h: {}
-	}
+	},
+	fixtureTabs:["Overview", "Lineups", "Statistics", "BetsHelper","H2H", "Standings"]
 });  
   
 //SetCalendar
@@ -41,6 +42,8 @@ const setNoDate = () => {
 	state.selectedDate.raw = null;
 	state.selectedDate.formated = null;
 };
+
+const getFixtureTabs = () => state.fixtureTabs;
 
 //GetCalendar
 const getCalendarOpen = () => state.isCalendarOpen;
@@ -118,5 +121,6 @@ export default {
 	getBetsHelper,
 	setBetsHelper,
 	setTeamsFromStandings,
-	getTeamsFromStandings
+	getTeamsFromStandings,
+	getFixtureTabs
 };
