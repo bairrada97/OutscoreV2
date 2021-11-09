@@ -5,7 +5,7 @@
             <OrganismsLineupsFieldGrid :team="team" />
         </div>
         <figure v-if="fixtureDetail.lineups[0].formation">
-            <img class="fixtureLineups__field" height="539" src="/field.png" />
+            <img class="fixtureLineups__field" height="539" src="images/field.png" />
         </figure>
         <div class="fixtureLineups__teamList">
             <MoleculesDropdown v-for="team in matchDetail.lineups" :key="team.team.id" @click="openTeamLineup(team.team.name)">
