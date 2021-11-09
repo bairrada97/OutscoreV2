@@ -1,6 +1,8 @@
 <template>
-    <span class="lineupsFieldPlayer__number">{{ number }}</span>
-    <span class="lineupsFieldPlayer__name">{{ name }}</span>
+    <div>
+        <span class="lineupsFieldPlayer__number">{{ number }}</span>
+        <span class="lineupsFieldPlayer__name">{{ name }}</span>
+    </div>
 </template>
 
 <script setup>

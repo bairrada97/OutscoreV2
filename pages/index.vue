@@ -1,13 +1,14 @@
 <template>
     <div>
-        <OrganismsCalendarBar />
+        <LazyOrganismsCalendarBar />
+
         <OrganismsOutterWrapper>
             <OrganismsInnerWrapper>
                 <h2 class="leagueTypes">Favorite Leagues</h2>
-                <div v-if="getFavoriteLeagues">
+                <div v-if="Object.keys(getFavoriteLeagues).length > 0">
                     <div v-for="competition in getFavoriteLeagues" :key="competition[0].league.id" class="favoriteLeagues">
-                        <MoleculesCardLeague :name="competition[0].league.name" :league="competition" />
-                        <MoleculesCardGame :game="game" v-for="game in competition" :key="game.fixture.id" />
+                        <LazyMoleculesCardLeague :name="competition[0].league.name" :league="competition" />
+                        <LazyMoleculesCardGame :game="game" v-for="game in competition" :key="game.fixture.id" />
                     </div>
                 </div>
                 <p v-else class="noFavoriteLeague">Currently you haven't select any favorite leagues</p>
@@ -18,14 +19,14 @@
             <h2 class="leagueTypes">National Leagues</h2>
 
             <div @click="openGame($event, countryName)" v-for="(countryName, key) in data" :key="countryName.league.id">
-                <MoleculesCardCountry :country="countryName" :name="key" :isOpen="getOpenGame(countryName) ? 'isOpen' : ''">
+                <LazyMoleculesCardCountry :country="countryName" :name="key" :isOpen="getOpenGame(countryName) ? 'isOpen' : ''">
                     <OrganismsInnerWrapper v-if="getOpenGame(countryName)">
                         <div v-for="(competition, key) in countryName.league" :key="key">
-                            <MoleculesCardLeague :name="key" :league="competition" />
-                            <MoleculesCardGame v-for="game in competition" :key="game.fixture.id + game.fixture.status.elapsed" :game="game" />
+                            <LazyMoleculesCardLeague :name="key" :league="competition" />
+                            <LazyMoleculesCardGame v-for="game in competition" :key="game.fixture.id + game.fixture.status.elapsed" :game="game" />
                         </div>
                     </OrganismsInnerWrapper>
-                </MoleculesCardCountry>
+                </LazyMoleculesCardCountry>
             </div>
         </OrganismsOutterWrapper>
     </div>

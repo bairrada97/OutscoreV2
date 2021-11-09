@@ -1,9 +1,9 @@
 <template>
     <div class="matchDetail">
-        <OrganismsFixtureInfo :fixtureDetail="setFixture || data" />
+        <LazyOrganismsFixtureInfo :fixtureDetail="setFixture || data" />
         <OrganismsFixtureTabsWrapper>
-            <MoleculesFixtureTab title="Overview"><OrganismsFixtureOverview v-if="getSelectedTab == 'Overview'" :fixtureDetail="data" /> </MoleculesFixtureTab>
-            <MoleculesFixtureTab title="Lineups"><OrganismsFixtureLineups v-if="getSelectedTab == 'Lineups'" :fixtureDetail="data" /></MoleculesFixtureTab>
+            <MoleculesFixtureTab title="Overview"><LazyOrganismsFixtureOverview v-if="getSelectedTab == 'Overview'" :fixtureDetail="data" /> </MoleculesFixtureTab>
+            <MoleculesFixtureTab title="Lineups"><LazyOrganismsFixtureLineups v-if="getSelectedTab == 'Lineups'" :fixtureDetail="data" /></MoleculesFixtureTab>
             <MoleculesFixtureTab title="Statistics"><div v-if="getSelectedTab == 'Statistics'">cenas2</div></MoleculesFixtureTab>
             <MoleculesFixtureTab title="BetsHelper"><div v-if="getSelectedTab == 'BetsHelper'">cenas3</div></MoleculesFixtureTab>
             <MoleculesFixtureTab title="H2H"><div v-if="getSelectedTab == 'H2H'">cenas4</div></MoleculesFixtureTab>

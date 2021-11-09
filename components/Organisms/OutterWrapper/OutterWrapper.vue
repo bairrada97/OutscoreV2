@@ -4,17 +4,7 @@
     </div>
 </template>
 
-<script>
-import { computed } from '@nuxtjs/composition-api';
-import store from '@/store.js';
-
-export default {
-    components: {},
-    setup() {
-        return {};
-    }
-};
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 .outterWrapper {

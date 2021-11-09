@@ -4,22 +4,6 @@
     </div>
 </template>
 
-<script>
-import { computed } from '@nuxtjs/composition-api';
-import store from '@/store.js';
+<script setup></script>
 
-export default {
-    components: {},
-    setup() {
-        return {};
-    }
-};
-</script>
-
-<style lang="scss" scoped>
-.outterWrapper {
-    &:last-of-type {
-        margin-bottom: 55px;
-    }
-}
-</style>
+<style lang="scss"></style>
