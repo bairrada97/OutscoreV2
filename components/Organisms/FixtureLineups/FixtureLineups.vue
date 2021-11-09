@@ -1,5 +1,5 @@
 <template>
-    <div class="fixtureLineups" v-if="fixtureDetail.lineups && fixtureDetail.lineups.length > 0">
+    <div class="fixtureLineups">
         <div class="fixtureLineups__container" :data-id="index" v-for="(team, index) in fixtureDetail.lineups" :key="team.team.id">
             <MoleculesLineupsFieldHeader :team="team" />
             <OrganismsLineupsFieldGrid :team="team" />
@@ -8,25 +8,26 @@
             <img class="fixtureLineups__field" height="539" src="images/field.png" />
         </figure>
         <div class="fixtureLineups__teamList">
-            <MoleculesDropdown v-for="team in matchDetail.lineups" :key="team.team.id" @click="openTeamLineup(team.team.name)">
-                <!-- <div class="fixtureLineups__cardContainer">
-                    <CardTeamLineup :team="team">
+            <MoleculesDropdown v-for="team in fixtureDetail.lineups" :key="team.team.id" @click="openTeamLineup(team.team.name)">
+                <div class="fixtureLineups__cardContainer">
+                    <MoleculesCardTeamLineup :team="team">
                         <div class="fixtureLineups__teamListContainer" v-if="getOpenTeamLineup(team.team.name)">
                             <div class="fixtureLineups__bench" v-if="team.coach">
-                                <CardPlayerLineup :player="team.coach" />
+                                <MoleculesCardPlayerLineup :player="team.coach" />
                             </div>
-                            <CardPlayerLineup :player="player.player" v-for="player in team.startXI" :key="player.player.id" :events="getPlayerEvents(player.player.id)" />
+                            <MoleculesCardPlayerLineup :player="player.player" v-for="player in team.startXI" :key="player.player.id" :events="getPlayerEvents(player.player.id)" />
                             <div class="fixtureLineups__bench" v-if="team.substitutes">
                                 <span class="fixtureLineups__title">Bench</span>
-                                <CardPlayerLineup :player="player.player" v-for="player in team.substitutes" :key="player.player.id" :events="getPlayerEvents(player.player.id)" />
+                                <MoleculesCardPlayerLineup :player="player.player" v-for="player in team.substitutes" :key="player.player.id" :events="getPlayerEvents(player.player.id)" />
                             </div>
-                            <div class="fixtureLineups__injuried" v-if="matchInjuries.length > 0">
+
+                            <div class="fixtureLineups__injuried" v-if="fixtureInjuries.length > 0">
                                 <span class="fixtureLineups__title">Injured and suspended players</span>
-                                <CardPlayerLineup :player="player.player" v-for="player in renderInjuriesByTeam(team.team.id)" :key="player.player.id" :injury="player.player" />
+                                <MoleculesCardPlayerLineup :player="player.player" v-for="player in renderInjuriesByTeam(team.team.id)" :key="player.player.id" :injury="player.player" />
                             </div>
                         </div>
-                    </CardTeamLineup>
-                </div> -->
+                    </MoleculesCardTeamLineup>
+                </div>
             </MoleculesDropdown>
         </div>
     </div>
@@ -39,10 +40,80 @@ import useInjuries from '@/utils/useInjuries';
 const props = defineProps({
     fixtureDetail: Object
 });
-
+const isOpen = ref([]);
 const { players, events, fixture } = props.fixtureDetail;
+const { loadInjuries, fixtureInjuries } = useInjuries();
 
-const getPlayerEvents = (playerID) => events.value.filter((event) => event.player.id == playerID);
+const { data, refresh } = await useAsyncData(`fixtureInjuries`, () => {
+    return loadInjuries(fixture.id);
+});
+console.log(data.value);
+const getPlayerEvents = (playerID) => events.filter((event) => event.player.id == playerID);
+
+const sortInjuriesByTeam = computed(() => {
+    return matchInjuries.value?.reduce((acc, player) => {
+        acc[player.team.name] = acc[player.team.name] || new Set();
+        acc[player.team.name].add(player);
+        return acc;
+    }, {});
+});
+
+const renderInjuriesByTeam = (teamID) => {
+    return data.value.filter((player) => player.team.id == teamID);
+};
+
+const getOpenTeamLineup = (teamName) => isOpen.value.find((item) => item == teamName);
+
+const openTeamLineup = (teamName) => {
+    if (isOpen.value.includes(teamName)) {
+        isOpen.value = isOpen.value.filter((name) => name != teamName);
+    } else {
+        isOpen.value.push(teamName);
+    }
+};
+
+const eventsLabels = ref([
+    {
+        name: 'Normal goal',
+        img: require('~/assets/icons/event__goal.svg')
+    },
+    {
+        name: 'Own Goal',
+        img: require('~/assets/icons/event__owngoal.svg')
+    },
+    {
+        name: 'Penalty',
+        img: require('~/assets/icons/event__penaltyGoal.svg')
+    },
+    {
+        name: 'Missed Penalty',
+        img: require('~/assets/icons/event__penaltyMissed.svg')
+    },
+    {
+        name: 'Yellow Card',
+        img: require('~/assets/icons/event__cardYellow.svg')
+    },
+    {
+        name: 'Second Yellow Card',
+        img: require('~/assets/icons/event__cardYellow.svg')
+    },
+    {
+        name: 'Red Card',
+        img: require('~/assets/icons/event__cardRed.svg')
+    },
+    {
+        name: 'Goal Cancelled',
+        img: require('~/assets/icons/event__cardRed.svg')
+    },
+    {
+        name: 'Penalty Confirmed',
+        img: require('~/assets/icons/event__penaltyGoal.svg')
+    },
+    {
+        name: 'Injured',
+        img: require('~/assets/icons/event__goal.svg')
+    }
+]);
 </script>
 
 <style lang="scss" scoped>
@@ -57,6 +128,7 @@ const getPlayerEvents = (playerID) => events.value.filter((event) => event.playe
         grid-column: 1/-1;
         display: flex;
         gap: 24px 0;
+        padding: 8px 16px;
         &[data-id='0'] {
             grid-row: 1;
             flex-direction: column;
@@ -120,7 +192,6 @@ const getPlayerEvents = (playerID) => events.value.filter((event) => event.playe
         display: grid;
         grid-template-columns: 40px 1fr auto auto;
         gap: 0 16px;
-        padding: 8px 16px;
         align-items: center;
 
         border-bottom: 1px solid rgba(183, 183, 183, 0.3);
@@ -129,7 +200,7 @@ const getPlayerEvents = (playerID) => events.value.filter((event) => event.playe
     &__teamListContainer {
         grid-column: 1/6;
         background: white;
-        padding: 16px 0;
+        padding: 16px;
         display: grid;
         gap: 16px 0;
     }
@@ -144,9 +215,5 @@ const getPlayerEvents = (playerID) => events.value.filter((event) => event.playe
     &__title {
         display: block;
     }
-}
-
-.matchLineupsCard {
-    $this: &;
 }
 </style>

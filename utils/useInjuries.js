@@ -1,10 +1,15 @@
+import store from '@/store.js';
+import useOutscoreRepository from './useOutscoreRepository';
 export default function () {
- const fixtureInjuries = ref(null)
-	const loadInjuries = async (fixtureID) => {
+    const { getFixturesInjuries } = useOutscoreRepository();
+    const fixtureInjuries = ref(null)
+
+	const loadInjuries =  (fixtureID) => {
         return getFixturesInjuries(fixtureID)
             .then((response) => {
-                fixtureInjuries.value = response.data.response;
-                return response.data.response;
+                fixtureInjuries.value =  response.response;
+             
+                return response.response;
             })
             .catch((error) => {});
 	};
@@ -14,3 +19,4 @@ export default function () {
 		loadInjuries
 	};
 }
+ 

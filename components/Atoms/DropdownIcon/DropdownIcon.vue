@@ -1,23 +1,9 @@
 <template>
-  <svg
-    class="dropdownIcon"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M7.41 8.29492L12 12.8749L16.59 8.29492L18 9.70492L12 15.7049L6 9.70492L7.41 8.29492Z"
-      fill="currentcolor"
-    />
-  </svg>
+    <svg class="dropdownIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.41 8.29492L12 12.8749L16.59 8.29492L18 9.70492L12 15.7049L6 9.70492L7.41 8.29492Z" fill="currentcolor" />
+    </svg>
 </template>
 
-<script setup>
-const props = defineProps({
-  name: String,
-});
-</script>
+<script setup></script>
 
 <style lang="scss" scoped></style>

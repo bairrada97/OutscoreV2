@@ -55,8 +55,7 @@ export default function  () {
          {
             baseURL: OUTSCORE_ENDPOINTS.baseURL,
             params: {
-                fixture:fixtureID,
-              
+                fixture: fixtureID, 
             }
          }); 
     }
