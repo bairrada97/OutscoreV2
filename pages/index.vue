@@ -18,8 +18,8 @@
         <OrganismsOutterWrapper>
             <h2 class="leagueTypes">National Leagues</h2>
 
-            <div @click="openGame($event, countryName)" v-for="(countryName, key) in data" :key="countryName.league.id">
-                <LazyMoleculesCardCountry :country="countryName" :name="key" :isOpen="getOpenGame(countryName) ? 'isOpen' : ''">
+            <MoleculesDropdown @click="openGame($event, countryName)" v-for="(countryName, key) in data" :key="countryName.league.id">
+                <LazyMoleculesCardCountry :country="countryName" :name="key">
                     <OrganismsInnerWrapper v-if="getOpenGame(countryName)">
                         <div v-for="(competition, key) in countryName.league" :key="key">
                             <LazyMoleculesCardLeague :name="key" :league="competition" />
@@ -27,7 +27,7 @@
                         </div>
                     </OrganismsInnerWrapper>
                 </LazyMoleculesCardCountry>
-            </div>
+            </MoleculesDropdown>
         </OrganismsOutterWrapper>
     </div>
 </template>

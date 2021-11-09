@@ -7,6 +7,28 @@
         <figure v-if="fixtureDetail.lineups[0].formation">
             <img class="fixtureLineups__field" height="539" src="/field.png" />
         </figure>
+        <div class="fixtureLineups__teamList">
+            <MoleculesDropdown v-for="team in matchDetail.lineups" :key="team.team.id" @click="openTeamLineup(team.team.name)">
+                <!-- <div class="fixtureLineups__cardContainer">
+                    <CardTeamLineup :team="team">
+                        <div class="fixtureLineups__teamListContainer" v-if="getOpenTeamLineup(team.team.name)">
+                            <div class="fixtureLineups__bench" v-if="team.coach">
+                                <CardPlayerLineup :player="team.coach" />
+                            </div>
+                            <CardPlayerLineup :player="player.player" v-for="player in team.startXI" :key="player.player.id" :events="getPlayerEvents(player.player.id)" />
+                            <div class="fixtureLineups__bench" v-if="team.substitutes">
+                                <span class="fixtureLineups__title">Bench</span>
+                                <CardPlayerLineup :player="player.player" v-for="player in team.substitutes" :key="player.player.id" :events="getPlayerEvents(player.player.id)" />
+                            </div>
+                            <div class="fixtureLineups__injuried" v-if="matchInjuries.length > 0">
+                                <span class="fixtureLineups__title">Injured and suspended players</span>
+                                <CardPlayerLineup :player="player.player" v-for="player in renderInjuriesByTeam(team.team.id)" :key="player.player.id" :injury="player.player" />
+                            </div>
+                        </div>
+                    </CardTeamLineup>
+                </div> -->
+            </MoleculesDropdown>
+        </div>
     </div>
 </template>
 

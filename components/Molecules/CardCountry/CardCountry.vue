@@ -1,5 +1,5 @@
 <template>
-    <div class="cardCountry" :class="{ isOpen: isOpen }">
+    <div class="cardCountry">
         <div class="cardCountry__container">
             <AtomsLogo v-if="country.image" :logo="country.image" :name="name" />
             <AtomsLogoName :name="name" />
@@ -37,9 +37,7 @@ const liveToggle = computed(() => store.getLiveToggle());
         box-sizing: border-box;
     }
 
-    &.isOpen {
-        border: 1px solid rgba(183, 183, 183, 0.3);
-
+    .isOpen & {
         #{$this}__container {
             background: var(--color-bg--black);
             color: white;
