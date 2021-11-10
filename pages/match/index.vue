@@ -5,7 +5,7 @@
             <MoleculesFixtureTab v-if="getSelectedTab == 'Overview'"><LazyOrganismsFixtureOverview :fixtureDetail="data" /> </MoleculesFixtureTab>
             <MoleculesFixtureTab v-if="getSelectedTab == 'Lineups'"><LazyOrganismsFixtureLineups :fixtureDetail="data" /></MoleculesFixtureTab>
             <MoleculesFixtureTab v-if="getSelectedTab == 'Statistics'"><LazyOrganismsFixtureStatistics :fixtureDetail="data" /></MoleculesFixtureTab>
-            <MoleculesFixtureTab v-if="getSelectedTab == 'BetsHelper'"><div>cenas3</div></MoleculesFixtureTab>
+            <MoleculesFixtureTab v-if="getSelectedTab == 'BetsHelper'"><LazyOrganismsFixtureBetsHelper :fixtureDetail="data" /></MoleculesFixtureTab>
             <MoleculesFixtureTab v-if="getSelectedTab == 'H2H'"><div>cenas4</div></MoleculesFixtureTab>
             <MoleculesFixtureTab v-if="getSelectedTab == 'Standings'"><div>cenas5</div></MoleculesFixtureTab>
         </OrganismsFixtureTabsWrapper>
