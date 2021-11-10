@@ -2,12 +2,12 @@
     <div class="matchDetail">
         <LazyOrganismsFixtureInfo :fixtureDetail="setFixture || data" />
         <OrganismsFixtureTabsWrapper>
-            <MoleculesFixtureTab title="Overview"><LazyOrganismsFixtureOverview v-if="getSelectedTab == 'Overview'" :fixtureDetail="data" /> </MoleculesFixtureTab>
-            <MoleculesFixtureTab title="Lineups"><LazyOrganismsFixtureLineups v-if="getSelectedTab == 'Lineups'" :fixtureDetail="data" /></MoleculesFixtureTab>
-            <MoleculesFixtureTab title="Statistics"><div v-if="getSelectedTab == 'Statistics'">cenas2</div></MoleculesFixtureTab>
-            <MoleculesFixtureTab title="BetsHelper"><div v-if="getSelectedTab == 'BetsHelper'">cenas3</div></MoleculesFixtureTab>
-            <MoleculesFixtureTab title="H2H"><div v-if="getSelectedTab == 'H2H'">cenas4</div></MoleculesFixtureTab>
-            <MoleculesFixtureTab title="Standings"><div v-if="getSelectedTab == 'Standings'">cenas5</div></MoleculesFixtureTab>
+            <MoleculesFixtureTab v-if="getSelectedTab == 'Overview'"><LazyOrganismsFixtureOverview :fixtureDetail="data" /> </MoleculesFixtureTab>
+            <MoleculesFixtureTab v-if="getSelectedTab == 'Lineups'"><LazyOrganismsFixtureLineups :fixtureDetail="data" /></MoleculesFixtureTab>
+            <MoleculesFixtureTab v-if="getSelectedTab == 'Statistics'"><LazyOrganismsFixtureStatistics :fixtureDetail="data" /></MoleculesFixtureTab>
+            <MoleculesFixtureTab v-if="getSelectedTab == 'BetsHelper'"><div>cenas3</div></MoleculesFixtureTab>
+            <MoleculesFixtureTab v-if="getSelectedTab == 'H2H'"><div>cenas4</div></MoleculesFixtureTab>
+            <MoleculesFixtureTab v-if="getSelectedTab == 'Standings'"><div>cenas5</div></MoleculesFixtureTab>
         </OrganismsFixtureTabsWrapper>
     </div>
 </template>
