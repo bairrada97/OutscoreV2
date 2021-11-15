@@ -14,22 +14,18 @@ export default function (fixture) {
     const fetchFixtureBetsHelper = (home, away) => {
         return getFixturesBetsHelper(home.id, away.id)
             .then((response) => {
-                const hasDataUpdated = !betsHelperResponse.value.cacheDate || response.data.cacheDate != betsHelperResponse.value.cacheDate;
-                if (hasDataUpdated) store.setBetsHelper(response.data);
-                return response.data;
-            })
-            .then(() => {
-                betsHelperResponse.value = computed(() => store.getBetsHelper());
+                store.setBetsHelper(response);
+                betsHelperResponse.value = store.getBetsHelper();
                 homeTeam.value = home;
                 awayTeam.value = away;
+                return response;
             })
+
             .catch((error) => {});
     };
 
     const getBoardInfoH2H = computed(() => {
-        if (betsHelperResponse.value.length == 0 || betsHelperResponse.value == undefined) return;
-
-        const { h2h } = betsHelperResponse.value.value;
+        const { h2h } = betsHelperResponse.value;
         const getFinishedGames = h2h.filter((item) => item.fixture.status.short == 'FT' || item.fixture.status.short == 'AET' || item.fixture.status.short == 'PEN');
         const gameLength = getFinishedGames.length;
         const getWinners = getFinishedGames.map((item) => Object.values(item.teams).find((team) => team.winner));
@@ -63,9 +59,7 @@ export default function (fixture) {
     });
 
     const getBoardInfo = computed(() => {
-        if (betsHelperResponse.value.length == 0 || betsHelperResponse.value == undefined) return;
-
-        const { home, away } = betsHelperResponse.value.value;
+        const { home, away } = betsHelperResponse.value;
         const getHomeFinishedGames = home.filter((item) => item.fixture.status.short == 'FT' || item.fixture.status.short == 'AET' || item.fixture.status.short == 'PEN');
         const getAwayFinishedGames = away.filter((item) => item.fixture.status.short == 'FT' || item.fixture.status.short == 'AET' || item.fixture.status.short == 'PEN');
         const uniqueMatches = [...new Map([...away, ...home].map((item) => [item.fixture.id, item])).values()];
