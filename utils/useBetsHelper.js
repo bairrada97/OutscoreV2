@@ -10,6 +10,39 @@ export default function (fixture) {
     const homeTeam = ref(null);
     const awayTeam = ref(null);
     const extraInfo = ref(null);
+    const betsHelperStats = computed(() => {
+        return [
+            {
+                name: "Full Time",
+                value: betsHelperFulltime.value
+            },
+            {
+                name: "First Half",
+                value: betsHelperFirstHalf.value
+            },
+            {
+                name: "Second Half",
+                value: betsHelperSecondHalf.value
+            }
+        ]   
+    })
+    const betsHelperH2HStats = computed(() => {
+        return [
+            {
+                name: "Full Time",
+                value: betsHelperH2HFulltime.value
+            },
+            {
+                name: "First Half",
+                value: betsHelperH2HFirstHalf.value
+            },
+            {
+                name: "Second Half",
+                value: betsHelperH2HSecondHalf.value
+            }
+        ]   
+    })
+
 
     const fetchFixtureBetsHelper = (home, away) => {
         return getFixturesBetsHelper(home.id, away.id)
@@ -124,8 +157,9 @@ export default function (fixture) {
     });
 
     const betsHelperFulltime = computed(() => {
-        if (betsHelperResponse.value.value.length == 0 || betsHelperResponse.value.value == undefined) return;
-        const { away, home } = betsHelperResponse.value.value;
+
+        if (betsHelperResponse.value.length == 0 || betsHelperResponse.value == undefined) return;
+        const { away, home } = betsHelperResponse.value;
         const uniqueMatches = [...away, ...home];
         const matchesLength = uniqueMatches.length;
 
@@ -156,8 +190,8 @@ export default function (fixture) {
     });
 
     const betsHelperFirstHalf = computed(() => {
-        if (betsHelperResponse.value.value.length == 0 || betsHelperResponse.value.value == undefined) return;
-        const { away, home } = betsHelperResponse.value.value;
+        if (betsHelperResponse.value.length == 0 || betsHelperResponse.value == undefined) return;
+        const { away, home } = betsHelperResponse.value;
         const uniqueMatches = [...away, ...home];
         const matchesLength = uniqueMatches.length;
 
@@ -175,8 +209,8 @@ export default function (fixture) {
     });
 
     const betsHelperSecondHalf = computed(() => {
-        if (betsHelperResponse.value.value.length == 0 || betsHelperResponse.value.value == undefined) return;
-        const { away, home } = betsHelperResponse.value.value;
+        if (betsHelperResponse.value.length == 0 || betsHelperResponse.value == undefined) return;
+        const { away, home } = betsHelperResponse.value;
         const uniqueMatches = [...away, ...home];
         const matchesLength = uniqueMatches.length;
 
@@ -194,8 +228,8 @@ export default function (fixture) {
     });
 
     const betsHelperH2HFulltime = computed(() => {
-        if (betsHelperResponse.value.value.length == 0 || betsHelperResponse.value.value == undefined) return;
-        const { h2h } = betsHelperResponse.value.value;
+        if (betsHelperResponse.value.length == 0 || betsHelperResponse.value == undefined) return;
+        const { h2h } = betsHelperResponse.value;
         const matchesLength = h2h.length;
 
         return h2h?.reduce((acc, stats, index) => {
@@ -225,38 +259,38 @@ export default function (fixture) {
     });
 
     const betsHelperH2HFirstHalf = computed(() => {
-        if (betsHelperResponse.value.value.length == 0 || betsHelperResponse.value.value == undefined) return;
-        const { h2h } = betsHelperResponse.value.value;
+        if (betsHelperResponse.value.length == 0 || betsHelperResponse.value == undefined) return;
+        const { h2h } = betsHelperResponse.value;
         const matchesLength = h2h.length;
 
         return h2h?.reduce((acc, stats, index) => {
-            getGoals(acc, stats, 0.5, 'firsthalf', index, matchesLength);
-            getGoals(acc, stats, 1.5, 'firsthalf', index, matchesLength);
-            getGoals(acc, stats, 2.5, 'firsthalf', index, matchesLength);
-            getGoals(acc, stats, 3.5, 'firsthalf', index, matchesLength);
-            getBothTeamsToScore(acc, stats, 'firsthalf', index, matchesLength);
-            getGoalsByTime(acc, stats, '0-15', index, matchesLength);
-            getGoalsByTime(acc, stats, '16-30', index, matchesLength);
-            getGoalsByTime(acc, stats, '31-45', index, matchesLength);
+            getGoals(acc, stats, 0.5, 'firsthalf', index, matchesLength, true);
+            getGoals(acc, stats, 1.5, 'firsthalf', index, matchesLength, true);
+            getGoals(acc, stats, 2.5, 'firsthalf', index, matchesLength, true);
+            getGoals(acc, stats, 3.5, 'firsthalf', index, matchesLength, true);
+            getBothTeamsToScore(acc, stats, 'firsthalf', index, matchesLength, true);
+            getGoalsByTime(acc, stats, '0-15', index, matchesLength, true);
+            getGoalsByTime(acc, stats, '16-30', index, matchesLength, true);
+            getGoalsByTime(acc, stats, '31-45', index, matchesLength, true);
 
             return acc;
         }, {});
     });
 
     const betsHelperH2HSecondHalf = computed(() => {
-        if (betsHelperResponse.value.value.length == 0 || betsHelperResponse.value.value == undefined) return;
-        const { h2h } = betsHelperResponse.value.value;
+        if (betsHelperResponse.value.length == 0 || betsHelperResponse.value == undefined) return;
+        const { h2h } = betsHelperResponse.value;
         const matchesLength = h2h.length;
 
         return h2h?.reduce((acc, stats, index) => {
-            getGoals(acc, stats, 0.5, 'secondhalf', index, matchesLength);
-            getGoals(acc, stats, 1.5, 'secondhalf', index, matchesLength);
-            getGoals(acc, stats, 2.5, 'secondhalf', index, matchesLength);
-            getGoals(acc, stats, 3.5, 'secondhalf', index, matchesLength);
-            getBothTeamsToScore(acc, stats, 'secondhalf', index, matchesLength);
-            getGoalsByTime(acc, stats, '46-60', index, matchesLength);
-            getGoalsByTime(acc, stats, '61-75', index, matchesLength);
-            getGoalsByTime(acc, stats, '75-90', index, matchesLength);
+            getGoals(acc, stats, 0.5, 'secondhalf', index, matchesLength, true);
+            getGoals(acc, stats, 1.5, 'secondhalf', index, matchesLength, true);
+            getGoals(acc, stats, 2.5, 'secondhalf', index, matchesLength, true);
+            getGoals(acc, stats, 3.5, 'secondhalf', index, matchesLength, true);
+            getBothTeamsToScore(acc, stats, 'secondhalf', index, matchesLength, true);
+            getGoalsByTime(acc, stats, '46-60', index, matchesLength, true);
+            getGoalsByTime(acc, stats, '61-75', index, matchesLength, true);
+            getGoalsByTime(acc, stats, '75-90', index, matchesLength, true);
 
             return acc;
         }, {});
@@ -562,6 +596,8 @@ export default function (fixture) {
         getBoardInfo,
         getBoardInfoH2H,
         extraInfo,
-        betsHelperResponse
+        betsHelperResponse,
+        betsHelperStats,
+        betsHelperH2HStats
     };
 }
