@@ -3,6 +3,14 @@ import store from '@/store.js';
 import store from '@/store.js';
 import useOutscoreRepository from './useOutscoreRepository';
 
+//awayteam doesnt win on his last 6 games away
+//same for homeTeam
+//awayTeam is weaker when playing away than home
+//away team doesnt win home team since X year(eg. since 2010);
+//games streak without losing
+//points earned in last X games(eg. home team earned only 6 points in his last 11 matches);
+
+
 export default function (fixture) {
     const { getFixturesBetsHelper } = useOutscoreRepository();
 
@@ -395,8 +403,8 @@ export default function (fixture) {
         createCategoryObject(acc, 'Clean Sheet', `yes`, homeTeam, awayTeam);
 
         if (isH2H) {
-            sumToCategory(acc, 'yes', 'away', awayTeamSide);
-            sumToCategory(acc, 'yes', 'home', homeTeamSide);
+            sumToCategory(acc, 'yes', 'away', oppositeAwayGoals, awayTeamSide);
+            sumToCategory(acc, 'yes', 'home', oppositeHomeGoals, homeTeamSide);
             return;
         }
         if (isGameBetweenEachOther) {

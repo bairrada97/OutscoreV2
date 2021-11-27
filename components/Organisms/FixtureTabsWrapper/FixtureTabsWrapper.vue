@@ -27,13 +27,14 @@ const state = reactive({
 store.setSelectedTab(selectedTab.value);
 
 const slideTabs = (title) => {
+    selectedTab.value = title;
+    store.setSelectedTab(title);
+
     const tabsContainer = matchDetail.value.querySelector('.fixtureTabsWrapper__list');
     const tabsContainerWidth = tabsContainer.scrollWidth;
     const tabs = matchDetail.value.querySelectorAll('.fixtureTabsWrapper__tab');
     const selectedTabIndex = [...tabs].findIndex((element, index) => element.innerText.toLowerCase() == selectedTab.value.toLowerCase());
 
-    selectedTab.value = title;
-    store.setSelectedTab(title);
     slideTabsLogic(tabs, tabsContainer, tabsContainerWidth, selectedTabIndex);
 };
 

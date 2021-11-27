@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="lineupsFieldPlayer">
         <span class="lineupsFieldPlayer__number">{{ number }}</span>
         <span class="lineupsFieldPlayer__name">{{ name }}</span>
     </div>
@@ -13,25 +13,31 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-.lineupsFieldPlayer__number {
+.lineupsFieldPlayer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    background-color: #fff;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 15px;
-    border-radius: 50%;
-}
+    flex-direction: column;
+    &__number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background-color: #fff;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 15px;
+        border-radius: 50%;
+    }
 
-.lineupsFieldPlayer__name {
-    font-size: 12px;
-    line-height: 15px;
-    border-radius: 50%;
-    color: #212121;
-    font-weight: 600;
-    text-align: center;
+    &__name {
+        font-size: 12px;
+        line-height: 15px;
+        border-radius: 50%;
+        color: #212121;
+        font-weight: 600;
+        text-align: center;
+    }
 }
 </style>
