@@ -1,6 +1,6 @@
 <template>
     <div class="fixtureBetsHelper">
-        <MoleculesFiltersWrapper>
+        <MoleculesFiltersWrapper :filters="betsHelperFilters">
             <AtomsFilters v-if="getSelectedBetsHelperFilter == 'Last 5 games'">
                 <MoleculesCardBetsBoard v-if="getBoardInfo" :fixtureDetail="fixtureDetail" :getBoardInfo="getBoardInfo" title="Last 5 games" type="All"></MoleculesCardBetsBoard>
                 <MoleculesDropdown v-for="stats in betsHelperStats" :key="stats.name" @click="openStateOfTheGame(stats.name)">
@@ -34,6 +34,7 @@ const props = defineProps({
     fixtureDetail: Object
 });
 const stateOfTheGame = ref(['Full Time', 'First Half', 'Second Half']);
+const betsHelperFilters = computed(() => store.getBetsHelperFilters());
 const getSelectedBetsHelperFilter = computed(() => store.getSelectedBetsHelperFilter());
 
 const { fetchFixtureBetsHelper, betsHelperStats, betsHelperH2HStats, getBoardInfo, getBoardInfoH2H, extraInfo, betsHelperResponse } = useBetsHelper(props.fixtureDetail);

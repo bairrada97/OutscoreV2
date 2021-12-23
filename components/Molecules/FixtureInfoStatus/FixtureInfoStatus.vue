@@ -21,7 +21,7 @@ const props = defineProps({
 });
 const penaltyText = ref('Penalties');
 const fixtureWillNotStartStatus = ref(['CANC', 'PST', 'ABD', 'WO', 'INT']);
-const shortNamesStatus = ref(['CANC', 'PST', 'ABD', 'WO', 'FT', 'HT']);
+const shortNamesStatus = ref(['CANC', 'PST', 'ABD', 'WO', 'FT', 'HT', 'INT']);
 
 const isPenalty = computed(() => props.fixtureDetail.fixture.status.short == 'PEN');
 const fixtureWillNotStart = computed(() => fixtureWillNotStartStatus.value.includes(props.fixtureDetail.fixture.status.short));

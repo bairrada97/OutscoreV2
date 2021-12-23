@@ -1,24 +1,24 @@
 <template>
     <div class="filtersWrapper">
         <ul class="filtersWrapper__list">
-            <li class="filtersWrapper__tab" v-for="tab in betsHelperFilters" :key="tab" :class="{ selected: selectedFilter == tab }" @click="selectFilter(tab)">{{ tab }}</li>
+            <li class="filtersWrapper__tab" v-for="tab in filters" :key="tab.name" :class="{ selected: selectedFilter == tab.name }" @click="selectFilter(tab)" :type="tab.type">{{ tab.name }}</li>
         </ul>
-
         <slot />
     </div>
 </template>
 
 <script setup>
 import store from '@/store.js';
-
-const betsHelperFilters = computed(() => store.getBetsHelperFilters());
-
-const selectedFilter = ref(betsHelperFilters.value[0]);
+const props = defineProps({
+    filters: Array
+});
+console.log(props.filters);
+const selectedFilter = ref(props.filters[0]);
 store.setSelectedBetsHelperFilter(selectedFilter.value);
 
-const selectFilter = (title) => {
-    selectedFilter.value = title;
-    store.setSelectedBetsHelperFilter(title);
+const selectFilter = (tab) => {
+    selectedFilter.value = tab;
+    store.setSelectedBetsHelperFilter(tab);
 };
 </script>
 

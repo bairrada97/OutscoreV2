@@ -56,11 +56,35 @@ export default function () {
         });
     };
 
+    
+     const getH2H = async (home,away,last = 41) => {
+        return  await $fetch(OUTSCORE_ENDPOINTS.h2h, {
+            baseURL: OUTSCORE_ENDPOINTS.baseURL,
+            params: {
+                h2h: `${home}-${away}`,
+                last
+            }
+        })
+    }
+
+    const getFixturesByTeam = async (team,last = 41) => {
+         return  await $fetch(OUTSCORE_ENDPOINTS.fixtures, {
+            baseURL: OUTSCORE_ENDPOINTS.baseURL,
+            params: {
+                team,
+                last
+            }
+        })
+    }
+
+
     return {
         getFixturesByDate,
         getLiveGames,
         getFixturesById,
         getFixturesInjuries,
-        getFixturesBetsHelper
+        getFixturesBetsHelper,
+        getH2H,
+        getFixturesByTeam
     };
 }
