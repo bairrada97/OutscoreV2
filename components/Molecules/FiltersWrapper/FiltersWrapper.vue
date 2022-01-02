@@ -12,7 +12,6 @@ import store from '@/store.js';
 const props = defineProps({
     filters: Array
 });
-console.log(props.filters);
 const selectedFilter = ref(props.filters[0]);
 store.setSelectedBetsHelperFilter(selectedFilter.value);
 

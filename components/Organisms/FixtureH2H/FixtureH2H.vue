@@ -1,8 +1,9 @@
 <template>
     <div class="fixtureH2H">
         <MoleculesFiltersWrapper :filters="H2HFilters"></MoleculesFiltersWrapper>
-
-        <MoleculesFixtureH2HList v-for="(team, index) in data" :key="index" :team="team" :fixtureDetail="fixtureDetail" :isActive="showFixtureContainer(H2HFilters[index].type)" />
+        <div v-if="getSelectedBetsHelperFilter">
+            <MoleculesFixtureH2HList v-for="(team, index) in data" :key="index" :team="team" :fixtureDetail="fixtureDetail" :title="H2HTitles[index]" :type="H2HFilters[index].type" :isActive="showFixtureContainer(H2HFilters[index].type)" />
+        </div>
 
         <!--
 
@@ -59,26 +60,33 @@ const { data, refresh } = await useAsyncData(`fixtureH2H`, () => {
     return loadH2H(props.fixtureDetail.teams);
 });
 const { h2h, homeTeam, awayTeam } = data.value;
-
+const H2HTitles = ref(['HEAD TO HEAD', `Last Fixtures: ${props.fixtureDetail.teams.home.name}`, `Last Fixtures: ${props.fixtureDetail.teams.away.name}`]);
 const H2HFilters = ref([
     {
         name: 'Overall',
-        type: 'Home,Away'
+        type: 'overall',
+        check: (type) => {
+            return ['overall', 'home', 'away'].includes(type);
+        }
     },
     {
         name: props.fixtureDetail.teams.home.name,
-        type: 'Home'
+        type: 'home',
+        check: (type) => {
+            return ['overall', 'home'].includes(type);
+        }
     },
     {
         name: props.fixtureDetail.teams.away.name,
-        type: 'Away'
+        type: 'away',
+        check: (type) => {
+            return ['overall', 'away'].includes(type);
+        }
     }
 ]);
 
 const getSelectedBetsHelperFilter = computed(() => store.getSelectedBetsHelperFilter());
-const showFixtureContainer = (type) => {
-    return type.includes(getSelectedBetsHelperFilter.value.type);
-};
+const showFixtureContainer = (type) => getSelectedBetsHelperFilter.value.check(type);
 </script>
 
 <style lang="scss" scoped>
