@@ -44,7 +44,7 @@ const renderClasses = computed(() => {
         background: var(--color-primary);
     }
 
-    &__teamDrew {
+    &__teamDraw {
         background: #797979;
     }
 
