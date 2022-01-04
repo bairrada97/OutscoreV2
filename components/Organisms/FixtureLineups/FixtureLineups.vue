@@ -5,7 +5,7 @@
             <OrganismsLineupsFieldGrid :team="team" />
         </div>
         <figure v-if="fixtureDetail.lineups[0].formation">
-            <img class="fixtureLineups__field" height="539" src="images/field.png" />
+            <img class="fixtureLineups__field" height="539" src="/images/field.png" />
         </figure>
         <div class="fixtureLineups__teamList">
             <MoleculesDropdown v-for="team in fixtureDetail.lineups" :key="team.team.id" @click="openTeamLineup(team.team.name)">
@@ -72,48 +72,7 @@ const openTeamLineup = (teamName) => {
     }
 };
 
-const eventsLabels = ref([
-    {
-        name: 'Normal goal',
-        img: require('~/assets/icons/event__goal.svg')
-    },
-    {
-        name: 'Own Goal',
-        img: require('~/assets/icons/event__owngoal.svg')
-    },
-    {
-        name: 'Penalty',
-        img: require('~/assets/icons/event__penaltyGoal.svg')
-    },
-    {
-        name: 'Missed Penalty',
-        img: require('~/assets/icons/event__penaltyMissed.svg')
-    },
-    {
-        name: 'Yellow Card',
-        img: require('~/assets/icons/event__cardYellow.svg')
-    },
-    {
-        name: 'Second Yellow Card',
-        img: require('~/assets/icons/event__cardYellow.svg')
-    },
-    {
-        name: 'Red Card',
-        img: require('~/assets/icons/event__cardRed.svg')
-    },
-    {
-        name: 'Goal Cancelled',
-        img: require('~/assets/icons/event__cardRed.svg')
-    },
-    {
-        name: 'Penalty Confirmed',
-        img: require('~/assets/icons/event__penaltyGoal.svg')
-    },
-    {
-        name: 'Injured',
-        img: require('~/assets/icons/event__goal.svg')
-    }
-]);
+const eventsLabels = ref([]);
 </script>
 
 <style lang="scss" scoped>
@@ -152,7 +111,6 @@ const eventsLabels = ref([
         grid-column: 1/-1;
         grid-row: 1/3;
         width: 100%;
-        border: 1px solid #dadada;
         z-index: -1;
         display: flex;
         align-items: center;
@@ -170,6 +128,10 @@ const eventsLabels = ref([
             left: 50%;
             transform: translate(-50%, -50%);
             background: #dadada;
+        }
+
+        img {
+            width: 100%;
         }
     }
 

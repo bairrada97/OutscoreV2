@@ -1,7 +1,6 @@
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-Bold.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-Bold.woff') format('woff');
+    src: url('../fonts/SourceSansPro-Bold.woff2') format('woff2'), url('../fonts/SourceSansPro-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -9,8 +8,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-BoldItalic.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-BoldItalic.woff') format('woff');
+    src: url('../fonts/SourceSansPro-BoldItalic.woff2') format('woff2'), url('../fonts/SourceSansPro-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -18,8 +16,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-BlackItalic.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-BlackItalic.woff') format('woff');
+    src: url('../fonts/SourceSansPro-BlackItalic.woff2') format('woff2'), url('../fonts/SourceSansPro-BlackItalic.woff') format('woff');
     font-weight: 900;
     font-style: italic;
     font-display: swap;
@@ -27,8 +24,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-Black.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-Black.woff') format('woff');
+    src: url('../fonts/SourceSansPro-Black.woff2') format('woff2'), url('../fonts/SourceSansPro-Black.woff') format('woff');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
@@ -36,8 +32,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-ExtraLightItalic.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-ExtraLightItalic.woff') format('woff');
+    src: url('../fonts/SourceSansPro-ExtraLightItalic.woff2') format('woff2'), url('../fonts/SourceSansPro-ExtraLightItalic.woff') format('woff');
     font-weight: 200;
     font-style: italic;
     font-display: swap;
@@ -45,8 +40,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-ExtraLight.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-ExtraLight.woff') format('woff');
+    src: url('../fonts/SourceSansPro-ExtraLight.woff2') format('woff2'), url('../fonts/SourceSansPro-ExtraLight.woff') format('woff');
     font-weight: 200;
     font-style: normal;
     font-display: swap;
@@ -54,8 +48,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-Light.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-Light.woff') format('woff');
+    src: url('../fonts/SourceSansPro-Light.woff2') format('woff2'), url('../fonts/SourceSansPro-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -63,8 +56,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-LightItalic.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-LightItalic.woff') format('woff');
+    src: url('../fonts/SourceSansPro-LightItalic.woff2') format('woff2'), url('../fonts/SourceSansPro-LightItalic.woff') format('woff');
     font-weight: 300;
     font-style: italic;
     font-display: swap;
@@ -72,8 +64,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-Italic.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-Italic.woff') format('woff');
+    src: url('../fonts/SourceSansPro-Italic.woff2') format('woff2'), url('../fonts/SourceSansPro-Italic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -81,8 +72,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-Regular.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-Regular.woff') format('woff');
+    src: url('../fonts/SourceSansPro-Regular.woff2') format('woff2'), url('../fonts/SourceSansPro-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -90,8 +80,7 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-SemiBold.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-SemiBold.woff') format('woff');
+    src: url('../fonts/SourceSansPro-SemiBold.woff2') format('woff2'), url('../fonts/SourceSansPro-SemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -99,10 +88,8 @@
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('~assets/fonts/SourceSansPro-SemiBoldItalic.woff2') format('woff2'),
-        url('~assets/fonts/SourceSansPro-SemiBoldItalic.woff') format('woff');
+    src: url('../fonts/SourceSansPro-SemiBoldItalic.woff2') format('woff2'), url('../fonts/SourceSansPro-SemiBoldItalic.woff') format('woff');
     font-weight: 600;
     font-style: italic;
     font-display: swap;
 }
-

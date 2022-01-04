@@ -18,23 +18,23 @@ const props = defineProps({
 const getEventIcon = (typeDetail) => {
     switch (typeDetail) {
         case 'Normal Goal':
-            return require('~/assets/icons/event__goal.svg');
+            return '/icons/event__goal.svg';
         case 'Own Goal':
-            return require('~/assets/icons/event__owngoal.svg');
+            return '/icons/event__owngoal.svg';
         case 'Penalty':
-            return require('~/assets/icons/event__penaltyGoal.svg');
+            return '/icons/event__penaltyGoal.svg';
         case 'Missed Penalty':
-            return require('~/assets/icons/event__penaltyMissed.svg');
+            return '/icons/event__penaltyMissed.svg';
         case 'Yellow Card':
-            require('~/assets/icons/event__cardYellow.svg');
+            '/icons/event__cardYellow.svg';
         case 'Second Yellow Card':
-            return require('~/assets/icons/event__cardYellow.svg');
+            return '/icons/event__cardYellow.svg';
         case 'Red Card':
-            return require('~/assets/icons/event__cardRed.svg');
+            return '/icons/event__cardRed.svg';
         case 'Goal Cancelled':
-            return require('~/assets/icons/event__cardRed.svg');
+            return '/icons/event__cardRed.svg';
         case 'Penalty Confirmed':
-            return require('~/assets/icons/event__penaltyGoal.svg');
+            return '/icons/event__penaltyGoal.svg';
     }
 };
 
@@ -43,9 +43,9 @@ const getInjuryIcon = (typeDetail) => {
     const isRedCard = typeDetail.reason.includes('Red Card');
     const isQuestionable = typeDetail.type.includes('Questionable');
 
-    if (isInjury) return require('~/assets/icons/injury.svg');
-    if (isRedCard) return require('~/assets/icons/event__cardRed.svg');
-    if (isQuestionable) return require('~/assets/icons/questionableInjury.svg');
+    if (isInjury) return '/icons/injury.svg';
+    if (isRedCard) return '/icons/event__cardRed.svg';
+    if (isQuestionable) return '/icons/questionableInjury.svg';
 };
 </script>
 

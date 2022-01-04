@@ -21,39 +21,39 @@ const props = defineProps({
 const getEventIcon = (typeDetail) => {
     switch (typeDetail) {
         case 'Normal Goal':
-            return require('~/assets/icons/event__goal.svg');
+            return '/icons/event__goal.svg';
         case 'Own Goal':
-            return require('~/assets/icons/event__owngoal.svg');
+            return '/icons/event__owngoal.svg';
         case 'Penalty':
-            return require('~/assets/icons/event__penaltyGoal.svg');
+            return '/icons/event__penaltyGoal.svg';
         case 'Missed Penalty':
-            return require('~/assets/icons/event__penaltyMissed.svg');
+            return '/icons/event__penaltyMissed.svg';
         case 'Yellow Card':
-            require('~/assets/icons/event__cardYellow.svg');
+            '/icons/event__cardYellow.svg';
         case 'Second Yellow Card':
-            return require('~/assets/icons/event__cardYellow.svg');
+            return '/icons/event__cardYellow.svg';
         case 'Red Card':
-            return require('~/assets/icons/event__cardRed.svg');
+            return '/icons/event__cardRed.svg';
         case 'Substitution 1':
-            return require('~/assets/icons/event__sub.svg');
+            return '/icons/event__sub.svg';
         case 'Substitution 2':
-            return require('~/assets/icons/event__sub.svg');
+            return '/icons/event__sub.svg';
         case 'Substitution 3':
-            return require('~/assets/icons/event__sub.svg');
+            return '/icons/event__sub.svg';
         case 'Substitution 4':
-            return require('~/assets/icons/event__sub.svg');
+            return '/icons/event__sub.svg';
         case 'Substitution 5':
-            return require('~/assets/icons/event__sub.svg');
+            return '/icons/event__sub.svg';
         case 'Substitution 6':
-            return require('~/assets/icons/event__sub.svg');
+            return '/icons/event__sub.svg';
         case 'Substitution 7':
-            return require('~/assets/icons/event__sub.svg');
+            return '/icons/event__sub.svg';
         case 'Goal Cancelled':
-            return require('~/assets/icons/event__cardRed.svg');
+            return '/icons/event__cardRed.svg';
         case 'Penalty Confirmed':
-            return require('~/assets/icons/event__penaltyGoal.svg');
+            return '/icons/event__penaltyGoal.svg';
         case 'Goal Disallowed - offside':
-            return require('~/assets/icons/event__penaltyGoal.svg');
+            return '/icons/event__penaltyGoal.svg';
     }
 };
 </script>

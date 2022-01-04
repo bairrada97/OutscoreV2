@@ -1,6 +1,4 @@
 import store from '@/store.js';
-
-import store from '@/store.js';
 import useOutscoreRepository from './useOutscoreRepository';
 
 //awayteam doesnt win on his last 6 games away
@@ -9,7 +7,6 @@ import useOutscoreRepository from './useOutscoreRepository';
 //away team doesnt win home team since X year(eg. since 2010);
 //games streak without losing
 //points earned in last X games(eg. home team earned only 6 points in his last 11 matches);
-
 
 export default function (fixture) {
     const { getFixturesBetsHelper } = useOutscoreRepository();
@@ -21,36 +18,35 @@ export default function (fixture) {
     const betsHelperStats = computed(() => {
         return [
             {
-                name: "Full Time",
+                name: 'Full Time',
                 value: betsHelperFulltime.value
             },
             {
-                name: "First Half",
+                name: 'First Half',
                 value: betsHelperFirstHalf.value
             },
             {
-                name: "Second Half",
+                name: 'Second Half',
                 value: betsHelperSecondHalf.value
             }
-        ]   
-    })
+        ];
+    });
     const betsHelperH2HStats = computed(() => {
         return [
             {
-                name: "Full Time",
+                name: 'Full Time',
                 value: betsHelperH2HFulltime.value
             },
             {
-                name: "First Half",
+                name: 'First Half',
                 value: betsHelperH2HFirstHalf.value
             },
             {
-                name: "Second Half",
+                name: 'Second Half',
                 value: betsHelperH2HSecondHalf.value
             }
-        ]   
-    })
-
+        ];
+    });
 
     const fetchFixtureBetsHelper = (home, away) => {
         return getFixturesBetsHelper(home.id, away.id)
@@ -165,7 +161,6 @@ export default function (fixture) {
     });
 
     const betsHelperFulltime = computed(() => {
-
         if (betsHelperResponse.value.length == 0 || betsHelperResponse.value == undefined) return;
         const { away, home } = betsHelperResponse.value;
         const uniqueMatches = [...away, ...home];
