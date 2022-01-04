@@ -4,7 +4,8 @@ export default function () {
         fixtures: '/fixtures',
         h2h: '/fixtures/headtohead',
         injuries: '/injuries',
-        betsHelper: '/betshelper'
+        betsHelper: '/betshelper',
+        standings: '/standings'
     };
 
     const getFixturesByDate = async (date, timezone) => {
@@ -56,27 +57,35 @@ export default function () {
         });
     };
 
-    
-     const getH2H = async (home,away,last = 41) => {
-        return  await $fetch(OUTSCORE_ENDPOINTS.h2h, {
+    const getH2H = async (home, away, last = 41) => {
+        return await $fetch(OUTSCORE_ENDPOINTS.h2h, {
             baseURL: OUTSCORE_ENDPOINTS.baseURL,
             params: {
                 h2h: `${home}-${away}`,
                 last
             }
-        })
-    }
+        });
+    };
 
-    const getFixturesByTeam = async (team,last = 41) => {
-         return  await $fetch(OUTSCORE_ENDPOINTS.fixtures, {
+    const getFixturesByTeam = async (team, last = 41) => {
+        return await $fetch(OUTSCORE_ENDPOINTS.fixtures, {
             baseURL: OUTSCORE_ENDPOINTS.baseURL,
             params: {
                 team,
                 last
             }
-        })
-    }
+        });
+    };
 
+    const getStandings = async (league, season) => {
+        return await $fetch(OUTSCORE_ENDPOINTS.standings, {
+            baseURL: OUTSCORE_ENDPOINTS.baseURL,
+            params: {
+                league,
+                season
+            }
+        });
+    };
 
     return {
         getFixturesByDate,
@@ -85,6 +94,7 @@ export default function () {
         getFixturesInjuries,
         getFixturesBetsHelper,
         getH2H,
-        getFixturesByTeam
+        getFixturesByTeam,
+        getStandings
     };
 }
