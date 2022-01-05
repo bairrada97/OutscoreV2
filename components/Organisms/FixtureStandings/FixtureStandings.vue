@@ -29,7 +29,7 @@ import useStandings from '@/utils/useStandings';
 const props = defineProps({
     fixtureDetail: Object
 });
-
+console.log('test');
 const { loadStandings } = useStandings();
 
 const { data, refresh } = await useAsyncData(`fixtureStandings`, () => {
